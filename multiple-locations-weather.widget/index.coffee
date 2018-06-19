@@ -2,50 +2,57 @@
   Forecast.io data widget for Übersicht.
 ###
 
-apiKey: ""
+settings = {
+  provider: "darksky"
+  apiKey = ""
 
-# Choose the color theme to use. Available themes are 'white' and 'black'.
-theme: 'white'
+  # Choose the color to use.
+  color: 'white'
 
-# Choose degree units; 'c' for celsius, 'f' for fahrenheit
-unit: 'c'
+  # Choose degree units; 'c' for celsius, 'f' for fahrenheit
+  unit: 'c'
 
-###
-  Object of locations to display. Maximum recommended 5, but changing the refresh frequency more can be added.
-  Each location will have an ID, a name, a latitude and a longitude.
-  Ex:
-    lnd:
-      name: "London"
-      lat: 51.50722
-      lng: -0.12750
-  where "lnd" is the ID.
-###
-locations:
-  mad:
-    name: "Madrid, ESP"
-    lat: 40.416691
-    lng: -3.700345
-  vlc:
-    name: "València, ESP"
-    country: "España"
-    lat: 39.470239
-    lng: -0.376805
-  ham:
-    name: "Hamburg, DEU"
-    lat: 53.5538148
-    lng: 9.9915752
-  bcn:
-    name: "Barcelona, ESP"
-    lat: 41.387917
-    lng: 2.169919
-  gij:
-    name: "Gijón, ESP"
-    lat: 43.5452608
-    lng: -5.6619264
+  ###
+    Object of locations to display. Maximum recommended 5, but changing the refresh frequency more can be added.
+    Each location will have an ID, a name, a latitude and a longitude.
+    Ex:
+      lnd:
+        name: "London"
+        lat: 51.50722
+        lng: -0.12750
+    where "lnd" is the ID.
+  ###
+  locations: {
+    mad: {
+      name: "Madrid, ESP"
+      lat: 40.416691
+      lng: -3.700345
+    }
+    vlc: {
+      name: "València, ESP"
+      country: "España"
+      lat: 39.470239
+      lng: -0.376805
+    }
+    ham: {
+      name: "Hamburg, DEU"
+      lat: 53.5538148
+      lng: 9.9915752
+    }
+    bcn: {
+      name: "Barcelona, ESP"
+      lat: 41.387917
+      lng: 2.169919
+    }
+    gij: {
+      name: "Gijón, ESP"
+      lat: 43.5452608
+      lng: -5.6619264
+    }
+  }
 
-
-exclude: "minutely,hourly,alerts,flags"
-
+  exclude: "minutely,hourly,alerts,flags"
+}
 
 ###
  Refresh every '(60 * 1000)  * x' minutes
@@ -53,7 +60,6 @@ exclude: "minutely,hourly,alerts,flags"
  refresh frequency.
 ###
 refreshFrequency: (60 * 1000) * 10
-
 
 widgetName: "multiple-locations-weather"
 
@@ -65,94 +71,98 @@ style: """
     .temperature
       b
         font-weight: bold
+
 	.icon
 		img
       width: 40px
       position: relative
       top: 15px
       left: 5px
-  @css {
-    span, div {
-      font: 100 11px/1 'Helvetica Neue', sans-serif;
-    }
-    #content {
-      border-radius: 10px;
-      padding-left: 10px;
-      padding-top: 5px;
-      padding-right: 10px;
-      padding-bottom: 20px;
-    }
-    #content.white {
-      color: #fff;
-      background-color: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.5);
-    }
-    #content.black {
-      color: #000;
-      background-color: rgba(0,0,0,0.025);
-      border: 1px solid rgba(0,0,0,0.5);
-    }
-    div.location {
-      margin-top: -5px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255,255,255, 0.5);
-    }
-    span.name {
-      width: 130px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-weight: 600;
-      font-size: 14px;
-    }
-    span.rain {
-      margin-left: 10px;
-    }
-    div.week-forecats {
-      height: 30px;
-    }
-    span.day {
-      width: 65px;
-    }
-    div.day-name,
-    div.day-icon,
-    div.max-min {
-      display: inline-block;
-    }
-    div.max-min {
-      width: 50%;
-    }
-    div.max-min div{
-      font-size: 8px;
-      line-height: 1.5;
-    }
-    .max-temp, .min-temp, .rain-prob {
-      font-weight: 600;
-      font-size: 8px;
-      line-height: 1.1;
-    }
-    div.day-icon {
-      width: 40%;
-    }
-    div.day-icon img {
-      position: relative;
-      top: -5px;
-      left: -5px;
-      width: 30px;
-    }
-    div.day-name {
-      margin-top: 8px;
-      margin-bottom: 5px;
-      text-transform: uppercase;
-      font-weight: 600;
-      text-align: center;
-    }
-  }
+
+  span, div
+    font: 100 11px/1 'Helvetica Neue', sans-serif;
+
+  #content
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+
+    .white
+      color: #fff
+      background-color: rgba(255,255,255,0.025)
+      border: 1px solid rgba(255,255,255,0.5)
+
+    .black
+      color: #000
+      background-color: rgba(0,0,0,0.025)
+      border: 1px solid rgba(0,0,0,0.5)
+
+  div.location
+    margin-top: -5px
+    padding-bottom: 10px
+    border-bottom: 1px solid rgba(255,255,255, 0.5)
+
+  span
+    .name
+      width: 130px
+      overflow: hidden
+      text-overflow: ellipsis
+      font-weight: 600
+      font-size: 14px
+
+    .rain
+      margin-left: 10px
+
+  div.week-forecats
+    height: 30px
+
+  span.day
+    width: 65px
+
+  div
+    .day-name
+    .day-icon
+    .max-min
+      display: inline-block
+      width: 50%
+
+      div
+        font-size: 8px
+        line-height: 1.5
+
+  .max-temp
+  .min-temp
+  .rain-prob
+    font-weight: 600
+    font-size: 8px
+    line-height: 1.1
+
+  div.day-icon
+    width: 40%;
+
+    img
+      position: relative
+      top: -5px
+      left: -5px
+      width: 30px
+
+  div.day-name
+    margin-top: 8px
+    margin-bottom: 5px
+    text-transform: uppercase
+    font-weight: 600
+    text-align: center
 """
 
 command: "echo {}"
 
 
 render: (o) -> """
+  <style>
+    @import url(multiple-locations-weather.widget/css/weather-icons.min.css);
+  </style>
 	<article id="content">
 	</article>
 """
